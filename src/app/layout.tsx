@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+import client from "@/client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +30,22 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
+      {client.ga4MeasurementId && !client.ga4MeasurementId.includes('XXXXXXXXXX') && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${client.ga4MeasurementId}`}
+            strategy="afterInteractive"
+          />
+          <Script id="ga4-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${client.ga4MeasurementId}');
+            `}
+          </Script>
+        </>
+      )}
     </html>
   );
 }

@@ -1,4 +1,5 @@
 import { Phone, Clock, MapPin, AtSign } from "lucide-react"
+import { PhoneLink } from "@/components/phone-link"
 import client from "@/client"
 
 export function SiteFooter() {
@@ -17,13 +18,10 @@ export function SiteFooter() {
 
           <div className="flex flex-col gap-2">
             <h3 className="text-sm font-semibold text-foreground">Contact</h3>
-            <a
-              href={client.phoneHref}
-              className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
-            >
+            <span className="flex items-center gap-2 text-sm text-muted-foreground">
               <Phone className="size-4 text-primary" />
-              {client.phone}
-            </a>
+              <PhoneLink className="transition-colors hover:text-primary" />
+            </span>
             <a
               href={`https://instagram.com/${client.instagramHandle}`}
               target="_blank"

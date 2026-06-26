@@ -83,7 +83,8 @@ export type ClientConfig = {
   googleMapsEmbedUrl: string; // iframe src from Google Maps "Share > Embed"
 
   // ── Lead tracking ────────────────────────────
-  resendAudienceId?: string; // optional, for Resend contact tracking
+  ga4MeasurementId?: string; // "G-XXXXXXXXXX" — create a property in Google Analytics per client
+  resendAudienceId?: string;
 };
 
 // ─────────────────────────────────────────────
@@ -245,6 +246,7 @@ const client: ClientConfig = {
   googleMapsEmbedUrl:
     "https://www.google.com/maps/embed?pb=placeholder",
 
+  ga4MeasurementId: "G-XXXXXXXXXX",
   resendAudienceId: undefined,
 };
 

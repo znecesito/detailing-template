@@ -1,27 +1,25 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { MapPin, Phone, Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { useActionState, useState } from 'react'
+import { MapPin, Check } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Card, CardContent } from "@/components/ui/card"
-import client from "@/client"
+} from '@/components/ui/select'
+import { Card, CardContent } from '@/components/ui/card'
+import { PhoneLink } from '@/components/phone-link'
+import { submitBooking } from '@/app/actions'
+import client from '@/client'
 
 export function Contact() {
-  const [submitted, setSubmitted] = useState(false)
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setSubmitted(true)
-  }
+  const [state, formAction, pending] = useActionState(submitBooking, { success: false })
+  const [vehicle, setVehicle] = useState('')
 
   return (
     <section id="book" className="scroll-mt-20 border-t border-border/60">
@@ -39,7 +37,7 @@ export function Contact() {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <Card>
             <CardContent className="pt-6">
-              {submitted ? (
+              {state.success ? (
                 <div className="flex flex-col items-center gap-3 py-10 text-center">
                   <div className="flex size-12 items-center justify-center rounded-full bg-primary/15 text-primary">
                     <Check className="size-6" />
@@ -53,7 +51,7 @@ export function Contact() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit}>
+                <form action={formAction}>
                   <FieldGroup>
                     <Field>
                       <FieldLabel htmlFor="name">Full name</FieldLabel>
@@ -73,7 +71,9 @@ export function Contact() {
 
                     <Field>
                       <FieldLabel htmlFor="vehicle">Vehicle type</FieldLabel>
-                      <Select>
+                      {/* hidden input so formData includes the vehicle value */}
+                      <input type="hidden" name="vehicle" value={vehicle} />
+                      <Select onValueChange={setVehicle}>
                         <SelectTrigger id="vehicle" className="w-full">
                           <SelectValue placeholder="Select vehicle type" />
                         </SelectTrigger>
@@ -90,8 +90,17 @@ export function Contact() {
                       <Input id="date" name="date" type="date" required />
                     </Field>
 
-                    <Button type="submit" size="lg" className="w-full font-semibold">
-                      Request Appointment
+                    {state.error && (
+                      <p className="text-sm text-destructive">{state.error}</p>
+                    )}
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full font-semibold"
+                      disabled={pending}
+                    >
+                      {pending ? 'Sending…' : 'Request Appointment'}
                     </Button>
                   </FieldGroup>
                 </form>
@@ -100,7 +109,7 @@ export function Contact() {
           </Card>
 
           <div className="flex flex-col gap-4">
-            {client.googleMapsEmbedUrl && !client.googleMapsEmbedUrl.includes("placeholder") ? (
+            {client.googleMapsEmbedUrl && !client.googleMapsEmbedUrl.includes('placeholder') ? (
               <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-border sm:aspect-auto sm:flex-1">
                 <iframe
                   src={client.googleMapsEmbedUrl}
@@ -126,13 +135,9 @@ export function Contact() {
                   <MapPin className="mt-0.5 size-5 shrink-0 text-primary" />
                   <span className="text-sm text-foreground">{client.serviceArea}</span>
                 </div>
-                <a
-                  href={client.phoneHref}
-                  className="flex items-start gap-3 text-sm text-foreground transition-colors hover:text-primary"
-                >
-                  <Phone className="mt-0.5 size-5 shrink-0 text-primary" />
-                  <span>{client.phone}</span>
-                </a>
+                <div className="flex items-start gap-3 text-sm text-foreground">
+                  <PhoneLink className="flex items-center gap-3 text-sm text-foreground transition-colors hover:text-primary" />
+                </div>
               </CardContent>
             </Card>
           </div>

@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { PhoneLink } from "@/components/phone-link"
 import client from "@/client"
 
 export function SiteHeader() {
@@ -13,13 +14,10 @@ export function SiteHeader() {
         </a>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href={client.phoneHref}
-            className="hidden items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary sm:flex"
-          >
+          <span className="hidden items-center gap-2 text-sm font-medium sm:flex">
             <Phone className="size-4 text-primary" />
-            {client.phone}
-          </a>
+            <PhoneLink className="text-foreground transition-colors hover:text-primary" />
+          </span>
           <Button render={<a href="#book" />} nativeButton={false} size="sm" className="font-semibold">
             Book Now
           </Button>
