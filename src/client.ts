@@ -37,17 +37,15 @@ export type ClientConfig = {
   // ── Business basics ──────────────────────────
   businessName: string;
   tagline: string;
-  phone: string;          // displayed + tap-to-call href
+  phone: string;          // displayed format e.g. "(555) 012-3456"
+  phoneHref: string;      // tel: link e.g. "tel:+15550123456"
   email: string;
   address: string;
   serviceArea: string;    // "Greater Phoenix Area"
   instagramHandle: string; // without @
 
   // ── Hours ────────────────────────────────────
-  hours: {
-    weekdays: string;     // "Mon–Fri: 8am–6pm"
-    weekends: string;     // "Sat–Sun: 9am–4pm"
-  };
+  hours: { day: string; time: string }[];
 
   // ── Trust bar ────────────────────────────────
   trust: {
@@ -96,15 +94,17 @@ const client: ClientConfig = {
   businessName: "Shine Pro Detailing",
   tagline: "Showroom Finish. Your Driveway.",
   phone: "(555) 012-3456",
+  phoneHref: "tel:+15550123456",
   email: "hello@shinepro.com",
   address: "Phoenix, AZ 85001",
   serviceArea: "Greater Phoenix Area",
   instagramHandle: "shinepro_detail",
 
-  hours: {
-    weekdays: "Mon–Fri: 8am–6pm",
-    weekends: "Sat–Sun: 9am–4pm",
-  },
+  hours: [
+    { day: "Mon – Fri", time: "8:00 AM – 6:00 PM" },
+    { day: "Saturday",  time: "9:00 AM – 4:00 PM" },
+    { day: "Sunday",    time: "Closed" },
+  ],
 
   trust: {
     googleRating: 4.9,
@@ -116,8 +116,8 @@ const client: ClientConfig = {
   hero: {
     headline: "Your Car Deserves Better",
     subheadline: "Professional mobile detailing — we come to you.",
-    beforeImage: "/clients/placeholder/before.jpg",
-    afterImage: "/clients/placeholder/after.jpg",
+    beforeImage: "/clients/placeholder/before.png",
+    afterImage: "/clients/placeholder/after.png",
     ctaLabel: "Book Your Detail",
   },
 
@@ -172,12 +172,12 @@ const client: ClientConfig = {
   ],
 
   gallery: [
-    "/clients/placeholder/gallery-1.jpg",
-    "/clients/placeholder/gallery-2.jpg",
-    "/clients/placeholder/gallery-3.jpg",
-    "/clients/placeholder/gallery-4.jpg",
-    "/clients/placeholder/gallery-5.jpg",
-    "/clients/placeholder/gallery-6.jpg",
+    "/clients/placeholder/gallery-1.png",
+    "/clients/placeholder/gallery-2.png",
+    "/clients/placeholder/gallery-3.png",
+    "/clients/placeholder/gallery-4.png",
+    "/clients/placeholder/gallery-5.png",
+    "/clients/placeholder/gallery-6.png",
   ],
 
   testimonials: [
