@@ -52,12 +52,12 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 - [x] Base UI button warnings fixed (`nativeButton={false}` on link-style buttons)
 - [x] Dark theme + amber/gold primary color applied globally
 - [x] Mobile layout confirmed via Puppeteer screenshots
-- [ ] Wire contact form → Resend (currently shows success state but sends no email)
-- [ ] Wire click-to-call → GA4 event
 
 **Note on forks:** When you fork per client, you can change anything — not just `client.ts`. Swap colors, add a section, remove one, change copy. The fork is fully yours. `client.ts` just handles the data so you don't have to dig through component files for basic info.
 
-**Push to GitHub:** ✅ Done. Tag `v1.0` pending Resend + GA4.
+**Resend + GA4 moved to Phase 4** — both require a real client before they're useful (Resend needs a destination email, GA4 needs a per-client Measurement ID). No point wiring them now.
+
+**Push to GitHub:** ✅ Done. Template is complete.
 
 ---
 
@@ -70,6 +70,9 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 - [ ] Replace photos in `/public/clients/placeholder/` with their real before/after + gallery shots
 - [ ] Set `googleMapsEmbedUrl` in `client.ts` (Google Maps → Share → Embed → copy iframe src)
 - [ ] Deploy to Vercel, assign domain (~$12/yr)
+- [ ] Add `client.email` and `ga4MeasurementId` to `client.ts` for this client
+- [ ] Wire contact form → Resend (send leads to `client.email`)
+- [ ] Wire GA4 Measurement ID (create a property in Google Analytics, paste the ID into `client.ts`)
 - [ ] Add the URL to their GBP listing
 - [ ] Warm outreach (Instagram DM — comment/like first, then DM)
 - [ ] Log in tracking table (Business, Domain, Live date, GBP added, Form leads, Call clicks, Follow-up date)
@@ -130,8 +133,8 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 |------|---------|------|
 | v0.dev | Generate UI from a prompt | ✅ Phase 2 done |
 | shadcn/ui | Component library (copied into repo) | ✅ Initialized |
-| Resend | Contact form → email notification | Phase 3 remaining |
-| GA4 | Click-to-call tracking | Phase 3 remaining |
+| Resend | Contact form → email notification | Phase 4 (per client) |
+| GA4 | Click-to-call tracking | Phase 4 (per client) |
 | Vercel | Hosting (per client fork) | Phase 4 |
 | Puppeteer MCP | Visual QA screenshots | ✅ Quick pass done |
 | Claude Code | Wiring config, building | Throughout |
