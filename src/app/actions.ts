@@ -29,10 +29,12 @@ Vehicle: ${vehicle || 'Not specified'}
 Date:    ${date}
   `.trim()
 
+  // RESEND_API_KEY must be set in Vercel environment variables.
+  // Get your key at resend.com → API Keys (free tier: 3k emails/month).
   const apiKey = process.env.RESEND_API_KEY
 
   if (!apiKey || apiKey === 'placeholder') {
-    // Dev mode — log instead of sending
+    // Dev/placeholder mode — logs to console instead of sending. Safe to ignore locally.
     console.log('[Resend] Would send email to', client.email)
     console.log('[Resend]', subject)
     console.log('[Resend]', body)

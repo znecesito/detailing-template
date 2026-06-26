@@ -83,7 +83,9 @@ export type ClientConfig = {
   googleMapsEmbedUrl: string; // iframe src from Google Maps "Share > Embed"
 
   // ── Lead tracking ────────────────────────────
-  ga4MeasurementId?: string; // "G-XXXXXXXXXX" — create a property in Google Analytics per client
+  // GA4: analytics.google.com → Create Property → Data Streams → Web → copy Measurement ID
+  ga4MeasurementId?: string; // e.g. "G-AB12CD34EF"
+  // Resend: destination for booking emails. Set RESEND_API_KEY in Vercel env vars (resend.com → API Keys)
   resendAudienceId?: string;
 };
 
@@ -243,9 +245,11 @@ const client: ClientConfig = {
     },
   ],
 
+  // Google Maps → find their location → Share → Embed a map → copy the src="..." value from the iframe
   googleMapsEmbedUrl:
     "https://www.google.com/maps/embed?pb=placeholder",
 
+  // Replace with real ID from Google Analytics. Leave as-is during development — GA4 won't load.
   ga4MeasurementId: "G-XXXXXXXXXX",
   resendAudienceId: undefined,
 };

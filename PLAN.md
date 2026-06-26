@@ -64,18 +64,61 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 ### Phase 4 — First Client Deployment
 **Goal:** Ship the template for one real business end-to-end.
 
-- [ ] Find a business via MapGrade (no website, active GBP)
-- [ ] Fork the template repo on GitHub → rename to `detailing-[client-slug]`
-- [ ] Fill `client.ts` with their GBP data + scraped reviews
-- [ ] Replace photos in `/public/clients/placeholder/` with their real before/after + gallery shots
-- [ ] Set `googleMapsEmbedUrl` in `client.ts` (Google Maps → Share → Embed → copy iframe src)
-- [ ] Deploy to Vercel, assign domain (~$12/yr)
-- [ ] Add `client.email` and `ga4MeasurementId` to `client.ts` for this client
-- [ ] Wire contact form → Resend (send leads to `client.email`)
-- [ ] Wire GA4 Measurement ID (create a property in Google Analytics, paste the ID into `client.ts`)
-- [ ] Add the URL to their GBP listing
-- [ ] Warm outreach (Instagram DM — comment/like first, then DM)
-- [ ] Log in tracking table (Business, Domain, Live date, GBP added, Form leads, Call clicks, Follow-up date)
+#### Step 1 — Find a client
+- [ ] Use MapGrade to find a detailing business with no website and an active Google Business Profile
+
+#### Step 2 — Fork the repo
+- [ ] Go to github.com/znecesito/detailing-template → click **Fork**
+- [ ] Rename the fork to `detailing-[client-slug]` (e.g. `detailing-apex-auto`)
+- [ ] Set the fork to **private**
+- [ ] Clone it locally: `git clone https://github.com/znecesito/detailing-[slug].git`
+
+#### Step 3 — Fill in client.ts
+Open `src/client.ts` and replace every placeholder value:
+- [ ] `businessName`, `phone`, `phoneHref`, `email`, `address`, `serviceArea`, `instagramHandle`
+- [ ] `hours` array — pull from their GBP listing
+- [ ] `trust` — Google rating + review count from GBP, years in business, insured
+- [ ] `hero` — headline, subheadline you write; images come in Step 4
+- [ ] `services` — their actual package names, features, and prices
+- [ ] `testimonials` — copy 3 reviews word-for-word from their Google reviews
+- [ ] `howItWorks` — customize the 3 steps to their actual process
+- [ ] `faq` — 5 questions relevant to their business/area
+- [ ] `googleMapsEmbedUrl` — Google Maps → find their location → Share → Embed a map → copy the `src="..."` URL from the iframe code
+- [ ] `ga4MeasurementId` — see Step 6 below
+
+#### Step 4 — Replace photos
+- [ ] Drop their before/after photos into `public/clients/placeholder/` as `before.png` and `after.png`
+- [ ] Drop 6 gallery photos in as `gallery-1.png` through `gallery-6.png`
+- [ ] (You can rename the folder from `placeholder` to `[slug]` and update paths in `client.ts` — optional but cleaner)
+
+#### Step 5 — Set up Resend (contact form emails)
+- [ ] Go to **resend.com** → create a free account → go to API Keys → create a key
+- [ ] Keep the key somewhere safe — you'll need it in Vercel
+- [ ] Make sure `client.email` in `client.ts` is the client's real email address (that's where booking requests get sent)
+- [ ] You'll add the API key to Vercel in Step 7 — nothing to do in the code
+
+#### Step 6 — Set up GA4 (call tracking)
+- [ ] Go to **analytics.google.com** → Create → Property → fill in the business name
+- [ ] Under **Data Streams** → Web → enter the site's URL → create stream
+- [ ] Copy the **Measurement ID** (looks like `G-AB12CD34EF`)
+- [ ] Paste it into `client.ts` → `ga4MeasurementId: "G-AB12CD34EF"`
+- [ ] That's it — phone click tracking fires automatically once the ID is real
+
+#### Step 7 — Deploy to Vercel
+- [ ] Go to **vercel.com** → Add New Project → import the client's GitHub fork
+- [ ] Under **Environment Variables**, add: `RESEND_API_KEY` = your key from Step 5
+- [ ] Deploy
+- [ ] Assign a custom domain (~$12/yr from Namecheap or similar) in Vercel → Domains
+
+#### Step 8 — Go live
+- [ ] Add the live URL to their Google Business Profile listing (Website field)
+- [ ] Test the contact form end-to-end — submit it yourself and confirm you get the email
+- [ ] Test click-to-call on mobile — check GA4 Real-Time to confirm the event fires
+
+#### Step 9 — Outreach
+- [ ] Warm up on Instagram: follow their account, like 2–3 recent posts
+- [ ] DM: "Hey — I'm a web developer and I actually built a site for your business already. It's live and showing your Google reviews. Want to see it? Happy to give you 30 days free."
+- [ ] Log the client in your tracking table: Business, Domain, Live date, GBP added, Form leads, Call clicks, Follow-up date
 
 ---
 
