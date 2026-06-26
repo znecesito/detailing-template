@@ -8,53 +8,56 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 
 ## Phases
 
-### Phase 1 — Foundation
+### ✅ Phase 1 — Foundation
 **Goal:** Repo is set up and the data contract is defined before any UI is touched.
 
-- [ ] Initialize shadcn/ui (`npx shadcn@latest init`)
-- [ ] Define `client.ts` — the full TypeScript type + a placeholder object with every field
-- [ ] Create `/public/clients/placeholder/` with sample photos
-- [ ] Confirm dev server runs clean
-
-**Push to GitHub:** Yes — end of Phase 1 is the first push. The schema is the foundation everything else depends on.
+- [x] Initialize shadcn/ui (`npx shadcn@latest init`)
+- [x] Define `client.ts` — the full TypeScript type + a placeholder object with every field
+- [x] Create `/public/clients/placeholder/` with sample photos
+- [x] Confirm dev server runs clean
 
 ---
 
-### Phase 2 — Design (v0.dev)
+### ✅ Phase 2 — Design (v0.dev)
 **Goal:** Get a complete, polished visual design without hand-crafting CSS.
 
-- [ ] Open v0.dev and prompt for the full page (dark theme, before/after hero, 3-tier pricing, shadcn/ui, Next.js, mobile-first)
-- [ ] Iterate in v0 until all 10 sections look right
-- [ ] Copy the generated component code into the repo
-- [ ] Confirm it renders with placeholder data
+- [x] Designed full page in v0.dev (dark theme, amber/gold accents, mobile-first)
+- [x] Downloaded zip and imported all components into the repo
+- [x] Confirmed it renders with placeholder data
 
-**10 sections to cover:**
-1. Header — logo, phone (tap-to-call), "Book Now" CTA
-2. Hero — before/after slider (`react-compare-slider`) + headline + CTA
-3. Trust bar — Google rating, review count, years in business, insured badge
-4. Services — 3 package cards (Basic / Full / Ceramic) with per-vehicle-size pricing
-5. Gallery — 6–12 photos, masonry grid
-6. Testimonials — 3 real Google reviews, stars prominent
-7. How It Works — 3 steps
-8. FAQ — 5 questions
-9. Contact/Book — form (name, phone, vehicle type, date) + Google Maps embed
+**All 10 sections built:**
+1. Header — sticky, logo left, phone + Book Now right
+2. Hero — custom before/after drag slider + headline + CTA
+3. Trust bar — Google rating, review count, years in business, insured
+4. Services — 3 pricing cards (Basic / Full / Ceramic) with Sedan/SUV/Truck rows
+5. Gallery — masonry grid, 6 photos
+6. Testimonials — 3 Google review cards with stars
+7. How It Works — 3 numbered steps
+8. FAQ — accordion, 5 questions
+9. Contact/Book — form (name, phone, vehicle type, date) + map placeholder
 10. Footer — phone, hours, service area, Instagram
 
-**Push to GitHub:** Yes — after v0 code is pasted and confirmed rendering.
+**Notes:**
+- v0 built the before/after slider from scratch (no external library needed)
+- The `field.tsx` component is a custom v0 component copied into `src/components/ui/`
 
 ---
 
-### Phase 3 — Wire the Config
+### ✅ Phase 3 — Wire the Config
 **Goal:** Every hardcoded value in the UI is replaced with a read from `client.ts`. The template is complete.
 
-- [ ] Replace all hardcoded text, links, phone numbers, etc. with `client.ts` values
-- [ ] Wire photos to `/public/clients/slug/`
-- [ ] Wire Google Maps embed to client address
-- [ ] Wire contact form → Resend (free tier, 3k emails/month)
+- [x] All 10 sections reading from `client.ts`
+- [x] Photos wired to `/public/clients/placeholder/`
+- [x] Google Maps embed shows real iframe when URL is set, fallback placeholder otherwise
+- [x] Base UI button warnings fixed (`nativeButton={false}` on link-style buttons)
+- [x] Dark theme + amber/gold primary color applied globally
+- [x] Mobile layout confirmed via Puppeteer screenshots
+- [ ] Wire contact form → Resend (currently shows success state but sends no email)
 - [ ] Wire click-to-call → GA4 event
-- [ ] Visual QA: Puppeteer MCP screenshots at mobile + desktop breakpoints
 
-**Push to GitHub:** Yes — this is the "template complete" milestone. Tag it `v1.0`.
+**Note on forks:** When you fork per client, you can change anything — not just `client.ts`. Swap colors, add a section, remove one, change copy. The fork is fully yours. `client.ts` just handles the data so you don't have to dig through component files for basic info.
+
+**Push to GitHub:** ✅ Done. Tag `v1.0` pending Resend + GA4.
 
 ---
 
@@ -64,7 +67,8 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 - [ ] Find a business via MapGrade (no website, active GBP)
 - [ ] Fork the template repo on GitHub → rename to `detailing-[client-slug]`
 - [ ] Fill `client.ts` with their GBP data + scraped reviews
-- [ ] Add their before/after photos to `/public/clients/[slug]/`
+- [ ] Replace photos in `/public/clients/placeholder/` with their real before/after + gallery shots
+- [ ] Set `googleMapsEmbedUrl` in `client.ts` (Google Maps → Share → Embed → copy iframe src)
 - [ ] Deploy to Vercel, assign domain (~$12/yr)
 - [ ] Add the URL to their GBP listing
 - [ ] Warm outreach (Instagram DM — comment/like first, then DM)
@@ -75,8 +79,8 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 ### Phase 5 — Iterate (Clients 2–9)
 **Goal:** Repeat Phase 4 up to 5 businesses/month. Each client is its own forked repo.
 
-- If the template needs a fix or improvement, make it in the template repo and note it — don't push template changes via a client fork.
-- Track in Notion or Airtable.
+- Template improvements go to the template repo first, then apply manually to any existing forks that need them.
+- Track clients in Notion or Airtable.
 
 ---
 
@@ -85,22 +89,38 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 
 ---
 
+## What to Replace Per Client
+
+| Asset | Where |
+|-------|-------|
+| Business name, phone, address, tagline | `src/client.ts` |
+| Hours, service area, Instagram handle | `src/client.ts` |
+| Google rating, review count, years in business | `src/client.ts` |
+| Service names, features, prices | `src/client.ts` |
+| Google reviews (word for word) | `src/client.ts` |
+| FAQ questions & answers | `src/client.ts` |
+| Hero headline + subheadline + CTA label | `src/client.ts` |
+| Google Maps embed URL | `src/client.ts` |
+| Before/after photo + 6 gallery photos | `public/clients/placeholder/` → replace files |
+
+---
+
 ## Git & GitHub Practice
 
 ### Template repo (this one)
 - Lives at `github.com/znecesito/detailing-template`
-- Push after each phase milestone
 - This is the upstream source of truth — never edited via a client fork
+- Push improvements here first, then apply to affected client forks manually
 
 ### Per-client repos
-- Fork the template repo on GitHub (UI: "Fork" button → rename to `detailing-[slug]`)
-- Each fork gets its own Vercel deployment connected to that GitHub repo
-- Client-specific changes (client.ts, photos) stay in the fork — they never come back to the template
-- If you discover a template bug while working on a client fork, fix it in the template repo and manually apply the same fix to the client fork (or re-fork after fixing the template)
+- Fork on GitHub (UI: "Fork" button → rename to `detailing-[slug]`) → set to **private**
+- Connect the fork to Vercel for deployment
+- You can change anything in the fork — it's your own copy
+- Client-specific changes stay in the fork and never come back to the template
 
-### Branch strategy (template repo)
+### Branch strategy
 - `main` = always deployable/demo-ready
-- Do feature work directly on `main` for now (solo project, no need for branches until Phase 5+)
+- Work directly on `main` for now (no need for branches until Phase 5+)
 
 ---
 
@@ -108,11 +128,10 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 
 | Tool | Purpose | When |
 |------|---------|------|
-| v0.dev | Generate UI from a prompt | Phase 2 |
-| shadcn/ui | Component library (copied into repo) | Phase 1 init, then as needed |
-| `react-compare-slider` | Before/after hero | Phase 2/3 |
-| Resend | Contact form → email | Phase 3 |
-| GA4 | Click-to-call tracking | Phase 3 |
+| v0.dev | Generate UI from a prompt | ✅ Phase 2 done |
+| shadcn/ui | Component library (copied into repo) | ✅ Initialized |
+| Resend | Contact form → email notification | Phase 3 remaining |
+| GA4 | Click-to-call tracking | Phase 3 remaining |
 | Vercel | Hosting (per client fork) | Phase 4 |
-| Puppeteer MCP | Visual QA screenshots | Phase 3 |
+| Puppeteer MCP | Visual QA screenshots | ✅ Quick pass done |
 | Claude Code | Wiring config, building | Throughout |

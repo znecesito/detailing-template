@@ -92,6 +92,7 @@ export function Hero() {
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button
             render={<a href="#book" />}
+            nativeButton={false}
             size="lg"
             className="w-full font-semibold sm:w-auto"
           >
@@ -99,6 +100,7 @@ export function Hero() {
           </Button>
           <Button
             render={<a href="#services" />}
+            nativeButton={false}
             size="lg"
             variant="outline"
             className="w-full font-semibold sm:w-auto"

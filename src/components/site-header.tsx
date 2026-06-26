@@ -20,7 +20,7 @@ export function SiteHeader() {
             <Phone className="size-4 text-primary" />
             {client.phone}
           </a>
-          <Button render={<a href="#book" />} size="sm" className="font-semibold">
+          <Button render={<a href="#book" />} nativeButton={false} size="sm" className="font-semibold">
             Book Now
           </Button>
         </div>

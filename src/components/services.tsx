@@ -86,6 +86,7 @@ export function Services() {
                 <CardFooter>
                   <Button
                     render={<a href="#book" />}
+                    nativeButton={false}
                     className="w-full font-semibold"
                     variant={featured ? "default" : "outline"}
                   >
