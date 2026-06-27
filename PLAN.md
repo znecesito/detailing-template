@@ -67,10 +67,12 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 #### Step 1 — Find a client
 - [ ] Use MapGrade to find a detailing business with no website and an active Google Business Profile
 
-#### Step 2 — Fork the repo
-- [ ] Go to github.com/znecesito/detailing-template → click **Fork**
-- [ ] Rename the fork to `detailing-[client-slug]` (e.g. `detailing-apex-auto`)
-- [ ] Set the fork to **private**
+#### Step 2 — Create client repo from template
+- [ ] Go to github.com/znecesito/detailing-template → click **"Use this template"** → **"Create a new repository"**
+  - (If you don't see that button: go to Settings → check "Template repository" → save — one-time setup)
+- [ ] Name it `detailing-[client-slug]` (e.g. `detailing-apex-auto`)
+- [ ] Set to **Private**
+- [ ] Click **Create repository**
 - [ ] Clone it locally: `git clone https://github.com/znecesito/detailing-[slug].git`
 
 #### Step 3 — Fill in client.ts
@@ -123,9 +125,9 @@ Open `src/client.ts` and replace every placeholder value:
 ---
 
 ### Phase 5 — Iterate (Clients 2–9)
-**Goal:** Repeat Phase 4 up to 5 businesses/month. Each client is its own forked repo.
+**Goal:** Repeat Phase 4 up to 5 businesses/month. Each client is its own repo created from the template.
 
-- Template improvements go to the template repo first, then apply manually to any existing forks that need them.
+- Template improvements go to the template repo first, then apply manually to any existing client repos that need them.
 - Track clients in Notion or Airtable.
 
 ---
@@ -159,10 +161,11 @@ Open `src/client.ts` and replace every placeholder value:
 - Push improvements here first, then apply to affected client forks manually
 
 ### Per-client repos
-- Fork on GitHub (UI: "Fork" button → rename to `detailing-[slug]`) → set to **private**
-- Connect the fork to Vercel for deployment
-- You can change anything in the fork — it's your own copy
-- Client-specific changes stay in the fork and never come back to the template
+- Use the template: github.com/znecesito/detailing-template → **"Use this template"** → **"Create a new repository"** → private
+  - Note: GitHub doesn't allow forking your own repo to the same account — "Use this template" is the correct approach
+- Connect the new repo to Vercel for deployment
+- You can change anything in the client repo — it's a fully independent copy
+- Client-specific changes stay in the client repo and never come back to the template
 
 ### Branch strategy
 - `main` = always deployable/demo-ready
