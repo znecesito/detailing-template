@@ -43,6 +43,7 @@ export type ClientConfig = {
   address: string;
   serviceArea: string;    // "Greater Phoenix Area"
   instagramHandle: string; // without @
+  logo: string;            // path under /public/
 
   // ── Hours ────────────────────────────────────
   hours: { day: string; time: string }[];
@@ -87,6 +88,8 @@ export type ClientConfig = {
   ga4MeasurementId?: string; // e.g. "G-AB12CD34EF"
   // Resend: destination for booking emails. Set RESEND_API_KEY in Vercel env vars (resend.com → API Keys)
   resendAudienceId?: string;
+  // BCC'd on every booking email so you keep visibility after handing off client.email
+  notificationEmail?: string;
 };
 
 // ─────────────────────────────────────────────
@@ -102,6 +105,7 @@ const client: ClientConfig = {
   address: "Phoenix, AZ 85001",
   serviceArea: "Greater Phoenix Area",
   instagramHandle: "shinepro_detail",
+  logo: "/clients/placeholder/logo.png",
 
   hours: [
     { day: "Mon – Fri", time: "8:00 AM – 6:00 PM" },
@@ -252,6 +256,8 @@ const client: ClientConfig = {
   // Replace with real ID from Google Analytics. Leave as-is during development — GA4 won't load.
   ga4MeasurementId: "G-XXXXXXXXXX",
   resendAudienceId: undefined,
+  // Your email — BCC'd on every booking so you see leads even after handing off client.email.
+  notificationEmail: "your@email.com",
 };
 
 export default client;

@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PhoneLink } from "@/components/phone-link"
@@ -6,8 +7,16 @@ import client from "@/client"
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <a href="#" className="flex items-center gap-2">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-5">
+        <a href="#" className="flex items-center gap-3">
+          <Image
+            src={client.logo || "/placeholder.svg"}
+            alt={`${client.businessName} logo`}
+            width={48}
+            height={48}
+            priority
+            className="h-12 w-12 rounded-full object-cover"
+          />
           <span className="text-lg font-bold tracking-tight text-foreground sm:text-xl">
             {client.businessName}
           </span>

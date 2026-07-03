@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useState } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 import { MapPin, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -20,6 +20,11 @@ import client from '@/client'
 export function Contact() {
   const [state, formAction, pending] = useActionState(submitBooking, { success: false })
   const [vehicle, setVehicle] = useState('')
+
+  useEffect(() => {
+    if (!state.success) return
+    window.gtag?.('event', 'form_submit', { event_category: 'booking' })
+  }, [state.success])
 
   return (
     <section id="book" className="scroll-mt-20 border-t border-border/60">
@@ -73,7 +78,7 @@ export function Contact() {
                       <FieldLabel htmlFor="vehicle">Vehicle type</FieldLabel>
                       {/* hidden input so formData includes the vehicle value */}
                       <input type="hidden" name="vehicle" value={vehicle} />
-                      <Select onValueChange={setVehicle}>
+                      <Select onValueChange={(value) => setVehicle(value as string)}>
                         <SelectTrigger id="vehicle" className="w-full">
                           <SelectValue placeholder="Select vehicle type" />
                         </SelectTrigger>

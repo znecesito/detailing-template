@@ -27,6 +27,7 @@ export function Gallery() {
                 height={i % 3 === 0 ? 800 : i % 3 === 1 ? 500 : 650}
                 className="h-auto w-full object-cover transition-transform duration-300 hover:scale-105"
                 sizes="(max-width: 1024px) 50vw, 33vw"
+                loading={i < 2 ? "eager" : "lazy"}
               />
             </div>
           ))}

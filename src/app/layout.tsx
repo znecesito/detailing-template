@@ -15,8 +15,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Auto Detailing",
-  description: "Professional auto detailing services",
+  title: {
+    default: `${client.businessName} — ${client.tagline}`,
+    template: `%s | ${client.businessName}`,
+  },
+  description: `${client.hero.subheadline} Serving the ${client.serviceArea}.`,
+  applicationName: client.businessName,
+  openGraph: {
+    title: `${client.businessName} — ${client.tagline}`,
+    description: `${client.hero.subheadline} Serving the ${client.serviceArea}.`,
+    siteName: client.businessName,
+    type: "website",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

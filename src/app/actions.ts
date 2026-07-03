@@ -46,6 +46,7 @@ Date:    ${date}
     await resend.emails.send({
       from:    'Detailing Site <onboarding@resend.dev>',
       to:      client.email,
+      bcc:     client.notificationEmail,
       subject,
       text:    body,
     })
