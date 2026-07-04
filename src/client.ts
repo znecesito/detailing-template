@@ -4,6 +4,7 @@
 //  Every field used by the UI lives here.
 // ─────────────────────────────────────────────
 
+
 export type ServiceTier = {
   name: string;          // "Basic" | "Full Detail" | "Ceramic"
   description: string;
