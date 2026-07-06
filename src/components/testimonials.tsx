@@ -1,5 +1,8 @@
+"use client"
+
 import { Star } from "lucide-react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { useInView } from "@/hooks/use-in-view"
 import client from "@/client"
 
 function Stars({ count }: { count: number }) {
@@ -13,6 +16,8 @@ function Stars({ count }: { count: number }) {
 }
 
 export function Testimonials() {
+  const { ref, inView } = useInView<HTMLDivElement>()
+
   return (
     <section className="border-t border-border/60 bg-card/40">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
@@ -25,24 +30,34 @@ export function Testimonials() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {client.testimonials.map((review) => (
-            <Card key={review.author} className="flex flex-col">
-              <CardHeader>
-                <Stars count={review.rating} />
-              </CardHeader>
-              <CardContent className="flex flex-1 flex-col gap-4">
-                <p className="flex-1 text-pretty text-foreground">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <div className="flex items-center justify-between border-t border-border pt-3 text-sm">
-                  <span className="font-semibold text-foreground">
-                    {review.author}
-                  </span>
-                  <span className="text-muted-foreground">{review.date}</span>
-                </div>
-              </CardContent>
-            </Card>
+        <div ref={ref} className="mt-10 grid gap-6 md:grid-cols-3">
+          {client.testimonials.map((review, i) => (
+            <div
+              key={review.author}
+              className="transition-all duration-700"
+              style={{
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(2rem)",
+                transitionDelay: `${i * 150}ms`,
+              }}
+            >
+              <Card className="flex flex-col h-full">
+                <CardHeader>
+                  <Stars count={review.rating} />
+                </CardHeader>
+                <CardContent className="flex flex-1 flex-col gap-4">
+                  <p className="flex-1 text-pretty text-foreground">
+                    &ldquo;{review.text}&rdquo;
+                  </p>
+                  <div className="flex items-center justify-between border-t border-border pt-3 text-sm">
+                    <span className="font-semibold text-foreground">
+                      {review.author}
+                    </span>
+                    <span className="text-muted-foreground">{review.date}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </div>
       </div>

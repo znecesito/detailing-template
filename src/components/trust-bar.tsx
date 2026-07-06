@@ -1,27 +1,64 @@
+"use client"
+
+import { useEffect, useRef, useState } from "react"
 import { Star, MessagesSquare, Clock, ShieldCheck } from "lucide-react"
 import client from "@/client"
+
+function CountUp({ end, decimals = 0, suffix = '', duration = 2000 }: {
+  end: number; decimals?: number; suffix?: string; duration?: number
+}) {
+  const [val, setVal] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const started = useRef(false)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVal(end)
+      return
+    }
+    const obs = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || started.current) return
+      started.current = true
+      const t0 = performance.now()
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - t0) / duration)
+        setVal(end * (1 - Math.pow(1 - t, 3)))
+        if (t < 1) requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    }, { threshold: 0.4 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [end, duration])
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {decimals > 0 ? val.toFixed(decimals) : Math.round(val)}{suffix}
+    </span>
+  )
+}
 
 export function TrustBar() {
   const stats = [
     {
       icon: Star,
-      value: client.trust.googleRating.toFixed(1),
+      value: <CountUp end={client.trust.googleRating} decimals={1} />,
       label: "Google Rating",
       accent: true,
     },
     {
       icon: MessagesSquare,
-      value: String(client.trust.reviewCount),
+      value: <CountUp end={client.trust.reviewCount} />,
       label: "Reviews",
     },
     {
       icon: Clock,
-      value: `${client.trust.yearsInBusiness} yrs`,
+      value: <CountUp end={client.trust.yearsInBusiness} suffix=" yrs" />,
       label: "In Business",
     },
     {
       icon: ShieldCheck,
-      value: client.trust.insured ? "Insured" : "Licensed",
+      value: <span>{client.trust.insured ? "Insured" : "Licensed"}</span>,
       label: client.trust.insured ? "& Licensed" : "",
     },
   ]

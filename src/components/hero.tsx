@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react"
 import Image from "next/image"
 import { MoveHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { OilDropAnimation } from "@/components/oil-drop-animation"
 import client from "@/client"
 
 export function Hero() {
@@ -31,18 +32,28 @@ export function Hero() {
   return (
     <section className="relative">
       <div className="mx-auto max-w-6xl px-4 pt-10 pb-6 sm:pt-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium tracking-wide text-primary uppercase">
-            Premium Detailing
-          </span>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-balance text-foreground sm:text-5xl md:text-6xl">
-            {client.hero.headline}
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-base text-pretty text-muted-foreground sm:text-lg">
-            {client.hero.subheadline} Drag the slider to see the transformation.
-          </p>
+
+        {/* Text + signature animation (desktop: side-by-side) */}
+        <div className="lg:flex lg:items-center lg:gap-12">
+          <div className="mx-auto max-w-3xl text-center lg:mx-0 lg:max-w-none lg:flex-1 lg:text-left">
+            <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium tracking-wide text-primary uppercase animate-in fade-in-0 slide-in-from-bottom-6 [animation-duration:700ms] [animation-fill-mode:both] motion-reduce:animate-none">
+              Premium Detailing
+            </span>
+            <h1 className="mt-4 text-4xl font-bold tracking-tight text-balance text-foreground sm:text-5xl md:text-6xl animate-in fade-in-0 slide-in-from-bottom-6 [animation-duration:700ms] [animation-delay:150ms] [animation-fill-mode:both] motion-reduce:animate-none">
+              {client.hero.headline}
+            </h1>
+            <p className="mx-auto mt-4 max-w-xl text-base text-pretty text-muted-foreground sm:text-lg lg:mx-0 animate-in fade-in-0 slide-in-from-bottom-6 [animation-duration:700ms] [animation-delay:300ms] [animation-fill-mode:both] motion-reduce:animate-none">
+              {client.hero.subheadline} Drag the slider to see the transformation.
+            </p>
+          </div>
+
+          {/* Signature animation — desktop only */}
+          <div className="hidden lg:block lg:w-[260px] lg:shrink-0 animate-in fade-in-0 [animation-duration:1000ms] [animation-delay:350ms] [animation-fill-mode:both] motion-reduce:animate-none">
+            <OilDropAnimation />
+          </div>
         </div>
 
+        {/* Before/after slider */}
         <div
           ref={containerRef}
           role="slider"
@@ -52,7 +63,7 @@ export function Hero() {
           aria-valuemax={100}
           aria-valuenow={Math.round(position)}
           aria-valuetext={`${Math.round(position)}% after`}
-          className="relative mt-8 aspect-[16/10] w-full touch-none overflow-hidden rounded-2xl border border-border select-none sm:aspect-[2/1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          className="relative mt-8 aspect-[16/10] w-full touch-none overflow-hidden rounded-2xl border border-border select-none sm:aspect-[2/1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 animate-in fade-in-0 slide-in-from-bottom-4 [animation-duration:800ms] [animation-delay:500ms] [animation-fill-mode:both] motion-reduce:animate-none"
           onPointerDown={(e) => {
             draggingRef.current = true
             ;(e.target as HTMLElement).setPointerCapture?.(e.pointerId)
@@ -108,7 +119,8 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        {/* CTAs */}
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row animate-in fade-in-0 slide-in-from-bottom-4 [animation-duration:700ms] [animation-delay:650ms] [animation-fill-mode:both] motion-reduce:animate-none">
           <Button
             render={<a href="#book" />}
             nativeButton={false}
