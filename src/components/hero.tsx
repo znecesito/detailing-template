@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from "react"
 import Image from "next/image"
 import { MoveHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { OilDropAnimation } from "@/components/oil-drop-animation"
+import { SudsAnimation } from "@/components/suds-animation"
 import client from "@/client"
 
 export function Hero() {
@@ -49,7 +49,7 @@ export function Hero() {
 
           {/* Signature animation — desktop only */}
           <div className="hidden lg:block lg:w-[260px] lg:shrink-0 animate-in fade-in-0 [animation-duration:1000ms] [animation-delay:350ms] [animation-fill-mode:both] motion-reduce:animate-none">
-            <OilDropAnimation />
+            <SudsAnimation />
           </div>
         </div>
 

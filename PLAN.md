@@ -61,6 +61,29 @@ Build a reusable auto detailing website template. Each client deployment is a fo
 
 ---
 
+### ✅ Phase 3.5 — Template Polish (backported from first client)
+**Goal:** Apply fixes and improvements discovered during the first real deployment back into the template.
+
+- [x] Logo field in `client.ts` + logo shown in site header
+- [x] `notificationEmail` field in `client.ts` — BCC on every booking email
+- [x] Dynamic SEO metadata in `layout.tsx` (title, description, og:title, og:description, robots)
+- [x] GA4 `form_submit` event fires on successful booking
+- [x] Hero keyboard accessibility — arrow keys + Home/End move the slider; full ARIA slider role
+- [x] "After" label no longer clips outside the slider reveal area
+- [x] Gallery images — first 2 eager-loaded, rest lazy
+- [x] TypeScript errors fixed throughout
+- [x] `/new-client` Claude Code skill — automates repo creation, clone, client data entry, CLAUDE.md, and memory setup
+
+**Animations added:**
+- [x] Hero entrance stagger — badge → h1 → subheadline → slider → CTAs fade+slide up in sequence
+- [x] Desktop hero layout — text left, signature animation right (hidden on mobile)
+- [x] Foam/suds windshield wiper animation (replaces oil-drop) — wiper sweep, floating bubbles, soap ripples, cycling status
+- [x] Trust bar count-up — Google rating, review count, years in business animate on scroll
+- [x] Scroll-reveal on Services, Testimonials, How It Works — staggered fade+slide per card
+- [x] Reduced-motion safety in globals.css
+
+---
+
 ### Phase 4 — First Client Deployment
 **Goal:** Ship the template for one real business end-to-end.
 
