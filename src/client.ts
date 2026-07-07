@@ -100,11 +100,11 @@ export type ClientConfig = {
 const client: ClientConfig = {
   businessName: "Shine Pro Detailing",
   tagline: "Showroom Finish. Your Driveway.",
-  phone: "(555) 012-3456",
-  phoneHref: "tel:+15550123456",
-  email: "hello@shinepro.com",
-  address: "Phoenix, AZ 85001",
-  serviceArea: "Greater Phoenix Area",
+  phone: "(443) 838-7061",
+  phoneHref: "tel:+14438387061",
+  email: "zacknecesito@gmail.com",
+  address: "Houston, TX 77002",
+  serviceArea: "Greater Houston Area",
   instagramHandle: "shinepro_detail",
   logo: "/clients/placeholder/logo.png",
 
@@ -255,10 +255,10 @@ const client: ClientConfig = {
     "https://www.google.com/maps/embed?pb=placeholder",
 
   // Replace with real ID from Google Analytics. Leave as-is during development — GA4 won't load.
-  ga4MeasurementId: "G-XXXXXXXXXX",
+  ga4MeasurementId: "G-HG47MZ1VZP",
   resendAudienceId: undefined,
   // Your email — BCC'd on every booking so you see leads even after handing off client.email.
-  notificationEmail: "your@email.com",
+  notificationEmail: "zacknecesito@gmail.com",
 };
 
 export default client;
