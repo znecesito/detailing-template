@@ -1,6 +1,5 @@
 // ─────────────────────────────────────────────
-//  CLIENT CONFIG
-//  Fill this out for each client deployment.
+//  CLIENT CONFIG — fill this out per deployment.
 //  Every field used by the UI lives here.
 // ─────────────────────────────────────────────
 
