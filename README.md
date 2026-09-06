@@ -46,4 +46,3 @@ See `PLAN.md` for the full step-by-step deployment checklist.
 ## Automation
 
 The `/new-client` Claude Code skill automates repo creation, cloning, and client data entry. Run it with `/new-client` from the template directory in a Claude Code session.
-<!-- git connectivity test: 2026-09-05 -->
